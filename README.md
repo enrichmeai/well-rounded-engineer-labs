@@ -30,8 +30,8 @@ machine (in `.progress.json`; nothing is sent anywhere):
 
 ```bash
 python3 practice.py today            # what to do today
-python3 practice.py check 01         # run drill 01's tests (Python); add --java for Java
-python3 practice.py hint 01          # one hint at a time
+python3 practice.py check 01 --track concurrency     # run a drill's tests (Python); add --java for Java
+python3 practice.py hint 01 --track concurrency      # one hint at a time
 python3 practice.py list             # every drill, and the ones you have done
 python3 practice.py streak           # days in a row with at least one drill passed
 ```
@@ -55,8 +55,16 @@ The solutions are in their own folder so you are not tempted. Try first; take a 
 | | [03 · The last seat](concurrency/03-last-seat/) | Check, then act: 40 people book 10 seats | 10 min |
 | | [04 · The pipeline that never finishes](concurrency/04-pipeline-stall/) | One bad order kills a worker, and the job hangs | 15 min |
 | | [05 · Make it fast](concurrency/05-make-it-fast/) | Twenty network calls one after another | 10 min |
+| [Data structures](data-structures/) | [01 · The slow duplicate check](data-structures/01-slow-duplicate-check/) | A nested loop that grows with the square of the data | 10 min |
+| | [02 · The key that cannot be found](data-structures/02-key-not-found/) | Equal keys with different hashes: stock vanishes | 15 min |
+| | [03 · The slow queue](data-structures/03-slow-queue/) | Taking from the front of a list, 300,000 times | 10 min |
+| | [04 · The price at a moment](data-structures/04-price-at-a-moment/) | Scanning a sorted history from the start, for every refund | 15 min |
+| | [05 · The cache that forgets the wrong thing](data-structures/05-cache-forgets/) | First in, first out, where least recently used was meant | 10 min |
 
-More tracks will follow the guide: data structures, distributed systems, SQL, testing.
+Drill numbers repeat across tracks, so name the track when you check or ask for a hint:
+`python3 practice.py check 03 --track data-structures`.
+
+More tracks will follow the guide: distributed systems, SQL, testing.
 
 ## Every drill is checked
 
@@ -64,7 +72,9 @@ CI runs [`tools/verify_drills.py`](tools/verify_drills.py) on every change. For 
 checks that **the starter code fails** its tests and **the solution passes** them. A drill whose broken code happened
 to pass would teach nothing, so that is treated as a bug.
 
-The concurrency bugs are made reliable on purpose: each starter has a small, named stand-in for real slow work (an
+The data structures drills are timed: the starter gives the right answer, several seconds too slowly. The tests
+allow one second; the fixed versions take milliseconds, so the limit is far from both. The concurrency bugs are made
+reliable on purpose: each starter has a small, named stand-in for real slow work (an
 audit write, a payment call) that gives other threads a chance to run at the wrong moment, as real I/O does.
 
 ## Licence

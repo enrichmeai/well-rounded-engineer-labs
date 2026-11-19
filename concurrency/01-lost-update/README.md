@@ -22,9 +22,9 @@ cd python && python3 -m pytest -q                              # Python
 cd java && javac -d out *.java && java -cp out BankTest        # Java
 ```
 
-Or, from the top of the repo: `python3 practice.py check 01` (add `--java` for Java).
+Or, from the top of the repo: `python3 practice.py check 01 --track concurrency` (add `--java` for Java).
 
-Stuck? `python3 practice.py hint 01` shows one hint at a time. The worked answer and why it works are in
+Stuck? `python3 practice.py hint 01 --track concurrency` shows one hint at a time. The worked answer and why it works are in
 [`solutions/concurrency/01-lost-update/`](../../solutions/concurrency/01-lost-update/). Try first.
 
 ## Done when
