@@ -67,6 +67,13 @@ The solutions are in their own folder so you are not tempted. Try first; take a 
 | | [04 · The stale read](distributed-systems/04-stale-read/) | One replica missed the update, and the parcel goes to the old address | 15 min |
 | | [05 · The update that went back in time](distributed-systems/05-back-in-time/) | Events arrive out of order; the oldest one wins | 10 min |
 
+| [Functional style](functional/) | [01 · The function that changed its input](functional/01-changed-its-input/) | Tax added twice: a function rewrote its caller's list | 10 min |
+| | [02 · The pipeline you can only read once](functional/02-read-once/) | Right order count, £0 revenue: a lazy generator read twice | 10 min |
+| | [03 · The recursion that ran out](functional/03-recursion-ran-out/) | A category chain 100,000 deep overflows the stack | 10 min |
+| | [04 · The core and the shell](functional/04-core-and-shell/) | Pricing that reads the clock and sends email cannot be tested | 15 min |
+| | [05 · The parallel stream that lost items](functional/05-parallel-lost-items/) | Parallel `forEach` into a shared list: items lost, order random | 15 min |
+| | [06 · The report sorted the wrong way](functional/06-sorted-wrong-way/) | Filter, map, then two sorts where one two-key sort was needed | 10 min |
+
 Drill numbers repeat across tracks, so name the track when you check or ask for a hint:
 `python3 practice.py check 03 --track data-structures`.
 

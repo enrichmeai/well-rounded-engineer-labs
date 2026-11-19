@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PROGRESS = ROOT / ".progress.json"
-TRACKS = ["concurrency", "data-structures", "distributed-systems"]
+TRACKS = ["concurrency", "data-structures", "distributed-systems", "functional"]
 
 
 def drills() -> list[Path]:
