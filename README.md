@@ -61,10 +61,16 @@ The solutions are in their own folder so you are not tempted. Try first; take a 
 | | [04 · The price at a moment](data-structures/04-price-at-a-moment/) | Scanning a sorted history from the start, for every refund | 15 min |
 | | [05 · The cache that forgets the wrong thing](data-structures/05-cache-forgets/) | First in, first out, where least recently used was meant | 10 min |
 
+| [Distributed systems](distributed-systems/) | [01 · The double charge](distributed-systems/01-double-charge/) | A lost reply, a retry, and the customer pays twice | 10 min |
+| | [02 · The retry storm](distributed-systems/02-retry-storm/) | A thousand clients retry in step and knock the service over again | 15 min |
+| | [03 · The lock that outlived its owner](distributed-systems/03-lock-outlived-owner/) | A paused worker wakes up and overwrites the new lock holder | 15 min |
+| | [04 · The stale read](distributed-systems/04-stale-read/) | One replica missed the update, and the parcel goes to the old address | 15 min |
+| | [05 · The update that went back in time](distributed-systems/05-back-in-time/) | Events arrive out of order; the oldest one wins | 10 min |
+
 Drill numbers repeat across tracks, so name the track when you check or ask for a hint:
 `python3 practice.py check 03 --track data-structures`.
 
-More tracks will follow the guide: distributed systems, SQL, testing.
+More tracks will follow the guide: SQL, testing, security.
 
 ## Every drill is checked
 
