@@ -13,6 +13,8 @@ def folders(tmp_path):
     (base / "2026" / "inv-2001.pdf").write_bytes(b"invoice 2001")
     secret = tmp_path / "secret.txt"
     secret.write_bytes(b"DB_PASSWORD=hunter2")
+    (tmp_path / "invoices-old").mkdir()
+    (tmp_path / "invoices-old" / "inv-0001.pdf").write_bytes(b"another customer's invoice")
     return base, secret
 
 
@@ -26,6 +28,12 @@ def test_going_up_is_refused(folders):
     base, _ = folders
     with pytest.raises(PermissionError):
         read_invoice(base, "../secret.txt")
+
+
+def test_a_sibling_folder_with_a_similar_name_is_refused(folders):
+    base, _ = folders
+    with pytest.raises(PermissionError):
+        read_invoice(base, "../invoices-old/inv-0001.pdf")
 
 
 def test_an_absolute_path_is_refused(folders):

@@ -10,7 +10,8 @@ shows as a character and never parses as a tag. Escape `&` first, or you will do
 **Make the safe way the default.** Most modern frameworks escape every value they render by default, which OWASP
 recommends because it does not depend on deciding correctly which data is untrusted. The danger is in each framework's
 escape hatches, such as React's `dangerouslySetInnerHTML` or setting `innerHTML` directly. Two more layers limit the harm if one slips through: a Content Security Policy,
-and session cookies marked `HttpOnly` so scripts cannot read them.
+and session cookies marked `HttpOnly`, which OWASP's Session Management Cheat Sheet describes as stopping scripts
+from reading them through `document.cookie`.
 
 **Different places need different encoding**: HTML text, an attribute, a URL and JavaScript each have their own rules,
 which is why a template engine beats hand-written escaping in real code.

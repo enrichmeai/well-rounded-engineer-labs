@@ -5,9 +5,10 @@ absolute name replaces the folder entirely. Checking the *string* for `..` is th
 encodings, absolute paths and links all get past it.
 
 The fix checks the **result**, not the input: resolve where the path really points (following `..` and links), then
-check it is still inside the resolved folder. Refuse everything else.
+check it is still inside the resolved folder, comparing path components rather than strings (`/srv/invoices-old` starts
+with the string `/srv/invoices`). Refuse everything else.
 
-**Better still, do not take a path at all.** Look the invoice up by an ID the user owns, and keep the file name on the
+**Better still (our view), do not take a path at all.** Look the invoice up by an ID the user owns, and keep the file name on the
 server: then there is no path to traverse, and the access check from drill 02 applies.
 
 ## The rule, for people and for agents

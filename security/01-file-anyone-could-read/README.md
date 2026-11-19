@@ -27,7 +27,7 @@ Stuck? `python3 practice.py hint 01 --track security`. The worked answer and why
 ## Done when
 
 - An invoice inside the folder, or in a subfolder of it, is returned.
-- `../secret.txt`, an absolute path, and a link inside the folder that points outside are all refused.
+- `../secret.txt`, a sibling folder such as `../invoices-old/`, an absolute path, and a link inside the folder that points outside are all refused.
 
 ## Then
 

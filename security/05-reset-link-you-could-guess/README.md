@@ -26,8 +26,9 @@ Stuck? `python3 practice.py hint 05 --track security`. The worked answer and why
 
 ## Done when
 
-- Two tokens issued at the same moment are different, and each carries at least 32 bytes of randomness.
-- A token works once; the second use, and any use after 15 minutes, gets nothing.
+- Two tokens issued at the same moment are different, and each is at least 32 bytes long.
+- A token works once, up to and including 15 minutes; the second use, and any use after 15 minutes, gets nothing.
+- One thing no test can show: that the bytes come from a secure generator. A predictable generator can still produce 32 bytes. That part is checked by reading the code, which is why the rule is also written down ([`STANDARD.md`](../STANDARD.md)).
 
 ## Then
 

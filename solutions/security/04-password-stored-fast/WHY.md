@@ -16,7 +16,7 @@ real code, use a maintained password-hashing library rather than writing this yo
 
 ## The rule, for people and for agents
 
-> Store passwords only with a slow, salted password-hashing function from a maintained library (Argon2id, scrypt, bcrypt, or PBKDF2 with at least 600,000 iterations), never a plain hash, and compare in constant time.
+> Store passwords only with a slow, salted password-hashing function from a maintained library (Argon2id first; scrypt if it is not available; PBKDF2 with at least 600,000 iterations where FIPS-140 is required; bcrypt on legacy systems), never a plain hash, and compare in constant time.
 
 The same sentence is in [`security/STANDARD.md`](../../../security/STANDARD.md), which you can paste into your agent's
 instructions file. In a review, look for: `md5`, `sha1` or `sha256` near the word password; `==` comparing secrets; a home-made salt or hash format.

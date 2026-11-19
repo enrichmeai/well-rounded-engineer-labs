@@ -13,6 +13,11 @@ structured logger's processor, a request-logging middleware), so a debugging lin
 OWASP's Logging Cheat Sheet lists what should usually not be recorded directly, including passwords, session
 identifiers, access tokens and payment card data.
 
+**One thing this drill leaves out: log injection** (CWE-117). The allowed values (`User-Agent`, `X-Request-Id`) still come
+from the caller. A value containing a line break can forge a second, fake log line; Python's dict formatting happens to
+escape it, Java's `Map.toString()` does not. OWASP's Logging Cheat Sheet asks you to sanitise carriage returns, line feeds
+and delimiters in logged data, or to use a structured format such as JSON lines, which does it for you.
+
 ## The rule, for people and for agents
 
 > Never log secrets or personal data: log through one shared function that keeps allow-listed fields and redacts everything else by name.

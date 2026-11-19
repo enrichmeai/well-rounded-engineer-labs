@@ -8,7 +8,7 @@ reviewing code, as instructions for a coding agent, and as the description of th
 | 1 | Never build a file path from user input without resolving it and checking it is still inside the intended folder; prefer looking files up by an ID the user is allowed to see. | [01](01-file-anyone-could-read/) |
 | 2 | Every read or change of a stored object checks that the caller may access that specific object, in one shared function; answer "not found" for objects the caller may not see. | [02](02-order-that-was-not-yours/) |
 | 3 | Never build HTML, SQL or shell commands by joining strings with user input: use an auto-escaping template, parameterised queries and argument lists, and treat every opt-out of escaping as a review item. | [03](03-comment-that-ran-code/) |
-| 4 | Store passwords only with a slow, salted password-hashing function from a maintained library (Argon2id, scrypt, bcrypt, or PBKDF2 with at least 600,000 iterations), never a plain hash, and compare in constant time. | [04](04-password-stored-fast/) |
+| 4 | Store passwords only with a slow, salted password-hashing function from a maintained library (Argon2id first; scrypt if it is not available; PBKDF2 with at least 600,000 iterations where FIPS-140 is required; bcrypt on legacy systems), never a plain hash, and compare in constant time. | [04](04-password-stored-fast/) |
 | 5 | Anything that grants access (tokens, session IDs, API keys, reset or invitation links) comes from the secure random generator (`secrets`, `SecureRandom`), has at least 32 bytes of randomness, and expires; one-time tokens are deleted when used. | [05](05-reset-link-you-could-guess/) |
 | 6 | Never log secrets or personal data: log through one shared function that keeps allow-listed fields and redacts everything else by name. | [06](06-secret-in-the-log/) |
 | 7 | Never bind a request directly onto a stored object: accept a dedicated input type, or an explicit allow-list of editable fields, and refuse anything else before changing anything. | [07](07-field-nobody-meant-to-change/) |
@@ -29,7 +29,7 @@ Paste this block into the instructions file your agent reads (for example `CLAUD
 1. File paths from user input: resolve and check they stay inside the intended folder; prefer lookup by ID.
 2. Every object read or change checks the caller may access that object, in one shared function; "not found" otherwise.
 3. No HTML, SQL or shell built by joining strings with input: auto-escaping templates, parameterised queries, argument lists.
-4. Passwords: Argon2id, scrypt, bcrypt or PBKDF2 (600,000+ iterations) from a maintained library; constant-time compare.
+4. Passwords: Argon2id (else scrypt; PBKDF2 600,000+ only where FIPS-140 applies; bcrypt only on legacy) via a maintained library; constant-time compare.
 5. Tokens, session IDs, keys and links: secure random (secrets / SecureRandom), 32+ bytes, expiring; one-time tokens deleted on use.
 6. Logs: never secrets or personal data; log through the shared redacting function (allow-list, redact the rest by name).
 7. Requests never bind onto stored objects: a dedicated input type or an allow-list; refuse unknown fields before changing anything.

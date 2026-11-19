@@ -21,6 +21,9 @@ public class Profile {
         if (!refused.isEmpty()) {
             throw new IllegalArgumentException("fields not editable: " + refused);
         }
+        if (!changes.values().stream().allMatch(v -> v instanceof String)) {
+            throw new IllegalArgumentException("name and email must be text");   // check values too, before changing anything
+        }
         for (Map.Entry<String, Object> change : changes.entrySet()) {
             switch (change.getKey()) {
                 case "email" -> user.email = (String) change.getValue();

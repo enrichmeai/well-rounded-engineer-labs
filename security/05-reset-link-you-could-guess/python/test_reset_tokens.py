@@ -27,6 +27,12 @@ def test_a_token_works_once():
     assert redeem(store, token, NOW + timedelta(minutes=2)) is None
 
 
+def test_a_token_still_works_at_15_minutes():
+    store = {}
+    token = issue(store, "ana", NOW)
+    assert redeem(store, token, NOW + timedelta(minutes=15)) == "ana"
+
+
 def test_a_token_expires_after_15_minutes():
     store = {}
     token = issue(store, "ana", NOW)

@@ -7,7 +7,8 @@ generator in the random module, which is designed for modelling and simulation, 
 
 The fix:
 - **a secure generator**: `secrets` in Python, `SecureRandom` in Java; both draw on the operating system's source;
-- **enough of it**: 32 bytes, the size Python's documentation suggests is sufficient for the typical use case;
+- **enough of it**: 32 bytes, which Python's documentation (as of 2015) says is believed sufficient for the typical
+  use case of the `secrets` module;
 - **single use**: the token is removed when redeemed, so a forwarded or logged link cannot be replayed;
 - **a short life**: 15 minutes here; OWASP's cheat sheet asks for tokens that are single use and expire after an
   appropriate period.

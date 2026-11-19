@@ -7,7 +7,8 @@ own cheat sheet.
 
 The fix names what may change, **an allow-list**, and refuses the rest. Two details matter:
 - **refuse, do not silently ignore**, so a mistake in the client shows up in testing instead of quietly dropping data;
-- **check everything before applying anything**, so a refused request leaves no half-made change.
+- **check everything before applying anything** (the names and the values), so a refused request leaves no half-made
+  change. The loop that applies the changes is safe only because the allow-list ran first.
 
 **In real code, use a dedicated input type**: a `ProfileUpdate` record or DTO with only the editable fields, bound from
 the request, then copied onto the user. The type itself becomes the allow-list, and a new sensitive field on `User` is

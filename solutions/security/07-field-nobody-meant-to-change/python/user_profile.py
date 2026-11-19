@@ -17,6 +17,8 @@ def update_profile(user: User, changes: dict) -> User:
     refused = set(changes) - EDITABLE
     if refused:
         raise ValueError(f"fields not editable: {sorted(refused)}")
+    if not all(isinstance(value, str) for value in changes.values()):
+        raise ValueError("name and email must be text")      # check values too, before changing anything
     for field, value in changes.items():
         setattr(user, field, value)
     return user

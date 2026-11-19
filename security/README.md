@@ -9,7 +9,7 @@ add after a breach. Read first: [Security](https://enrichmeai.com/well-rounded-e
 | [02 · The order that was not yours](02-order-that-was-not-yours/) | Check access on every object, not only at login | A01 Broken Access Control | 10 min |
 | [03 · The comment that ran code](03-comment-that-ran-code/) | Encode output; never build markup by joining strings | A05 Injection | 10 min |
 | [04 · The password stored the fast way](04-password-stored-fast/) | Slow, salted password hashing; constant-time compare | A04 Cryptographic Failures | 15 min |
-| [05 · The reset link you could guess](05-reset-link-you-could-guess/) | Secure randomness, single use, expiry | A04, A07 | 15 min |
+| [05 · The reset link you could guess](05-reset-link-you-could-guess/) | Secure randomness, single use, expiry | A04 Cryptographic Failures, A07 Authentication Failures | 15 min |
 | [06 · The secret in the log](06-secret-in-the-log/) | Allow-list what you log; redact the rest by name | A09 Logging and Alerting Failures | 10 min |
 | [07 · The field nobody meant to change](07-field-nobody-meant-to-change/) | Allow-list what a request may change | A08 Software or Data Integrity Failures | 10 min |
 

@@ -31,5 +31,5 @@ Stuck? `python3 practice.py hint 03 --track security`. The worked answer and why
 
 ## Then
 
-- Output encoding and the other layers (a Content Security Policy, HttpOnly cookies): [Security](https://enrichmeai.com/well-rounded-engineer/security/) in the guide, and the OWASP [Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html).
+- Output encoding and the extra layers: [Security](https://enrichmeai.com/well-rounded-engineer/security/) in the guide, the OWASP [Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) (a Content Security Policy), and the [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) (`HttpOnly` cookies).
 - Try it with an agent: [the experiment in the track README](../README.md#try-it-with-an-agent).

@@ -25,6 +25,10 @@ public class ResetTokensTest {
         Check.equal("a token works", "ana", ResetTokens.redeem(once, token, now.plus(Duration.ofMinutes(1))));
         Check.equal("a token works only once", null, ResetTokens.redeem(once, token, now.plus(Duration.ofMinutes(2))));
 
+        Map<String, ResetTokens.Entry> edge = new HashMap<>();
+        String atFifteen = ResetTokens.issue(edge, "ana", now);
+        Check.equal("a token still works at 15 minutes", "ana", ResetTokens.redeem(edge, atFifteen, now.plus(Duration.ofMinutes(15))));
+
         Map<String, ResetTokens.Entry> late = new HashMap<>();
         String old = ResetTokens.issue(late, "ana", now);
         Check.equal("a token expires after 15 minutes", null, ResetTokens.redeem(late, old, now.plus(Duration.ofMinutes(16))));
