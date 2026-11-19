@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  drills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install pytest
+        run: python -m pip install pytest
+
+      - name: Every starter fails and every solution passes
+        run: python tools/verify_drills.py
+
+      - name: practice.py runs
+        run: |
+          python practice.py list
+          python practice.py today
+          python practice.py hint 01
