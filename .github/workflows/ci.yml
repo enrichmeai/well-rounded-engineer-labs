@@ -32,4 +32,5 @@ jobs:
         run: |
           python practice.py list
           python practice.py today
-          python practice.py hint 01
+          python practice.py hint 01 --track concurrency
+          python practice.py hint 01 --track data-structures

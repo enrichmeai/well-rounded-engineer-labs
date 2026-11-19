@@ -5,6 +5,8 @@
     python3 practice.py list             every drill, and the ones you have done
     python3 practice.py check 01         run drill 01's tests (Python); add --java for Java
     python3 practice.py hint 01          the next hint for drill 01, one at a time
+
+Drill numbers repeat across tracks: add --track data-structures (or any unique part of a track name) to choose.
     python3 practice.py streak           days in a row with at least one drill passed
 
 Your progress is kept in .progress.json next to this file. It never leaves your machine.
@@ -23,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PROGRESS = ROOT / ".progress.json"
-TRACKS = ["concurrency"]
+TRACKS = ["concurrency", "data-structures"]
 
 
 def drills() -> list[Path]:
@@ -37,11 +39,15 @@ def drill_id(path: Path) -> str:
     return f"{path.parent.name}/{path.name}"
 
 
-def find(name: str) -> Path:
-    """Accept '01', 'lost-update', '01-lost-update' or 'concurrency/01-lost-update'."""
-    matches = [d for d in drills() if name in (drill_id(d), d.name, d.name[:2], d.name[3:])]
-    if len(matches) != 1:
-        sys.exit(f"no single drill matches {name!r}; try: python3 practice.py list")
+def find(name: str, track: str | None = None) -> Path:
+    """Accept '01', 'lost-update', '01-lost-update' or 'concurrency/01-lost-update', optionally within a track."""
+    matches = [d for d in drills() if name in (drill_id(d), d.name, d.name[:2], d.name[3:])
+               and (track is None or track in d.parent.name)]
+    if len(matches) > 1:
+        tracks = ", ".join(sorted({d.parent.name for d in matches}))
+        sys.exit(f"{name!r} is in more than one track ({tracks}); add --track <name>")
+    if not matches:
+        sys.exit(f"no drill matches {name!r}; try: python3 practice.py list")
     return matches[0]
 
 
@@ -85,7 +91,11 @@ def streak(state: dict, today: dt.date) -> int:
 
 def cmd_list(_args) -> None:
     state = load()
+    track = None
     for d in drills():
+        if d.parent.name != track:
+            track = d.parent.name
+            print(f"{track}  (--track {track})")
         done = "done" if any(k.startswith(drill_id(d)) for k in state["passed"]) else "    "
         print(f"  [{done}] {d.name[:2]}  {title(d):45} {minutes(d)}")
 
@@ -101,9 +111,10 @@ def cmd_today(_args) -> None:
     print(f"Today: {title(d)}  ({minutes(d)}, {why})\n")
     if prediction(d):
         print(f"Before you start, predict: {prediction(d)}\n")
+    sel = f"{d.name[:2]} --track {d.parent.name}"
     print(f"Read:   {d.relative_to(ROOT)}/README.md")
-    print(f"Check:  python3 practice.py check {d.name[:2]}        (add --java for Java)")
-    print(f"Stuck:  python3 practice.py hint {d.name[:2]}")
+    print(f"Check:  python3 practice.py check {sel}        (add --java for Java)")
+    print(f"Stuck:  python3 practice.py hint {sel}")
 
 
 def run_tests(d: Path, java: bool, folder: Path | None = None) -> bool:
@@ -132,13 +143,14 @@ def _run_tests(d: Path, java: bool, folder: Path | None) -> bool:
 
 
 def cmd_check(args) -> None:
-    d = find(args.drill)
+    d = find(args.drill, args.track)
     if args.java and not shutil.which("javac"):
         sys.exit("javac not found: install a JDK 21 or newer")
     ok = run_tests(d, args.java)
     key = f"{drill_id(d)}/{'java' if args.java else 'python'}"
     if not ok:
-        print(f"\nNot yet. Read the failure above, then try again, or: python3 practice.py hint {d.name[:2]}")
+        print(f"\nNot yet. Read the failure above, then try again, or: "
+              f"python3 practice.py hint {d.name[:2]} --track {d.parent.name}")
         sys.exit(1)
     state = load()
     today = dt.date.today().isoformat()
@@ -151,7 +163,7 @@ def cmd_check(args) -> None:
 
 
 def cmd_hint(args) -> None:
-    d = find(args.drill)
+    d = find(args.drill, args.track)
     hints = re.split(r"^## Hint \d+\n", (d / "HINTS.md").read_text(), flags=re.M)[1:]
     state = load()
     shown = state["hints"].get(drill_id(d), 0)
@@ -176,9 +188,11 @@ def main() -> None:
     c = sub.add_parser("check")
     c.add_argument("drill")
     c.add_argument("--java", action="store_true")
+    c.add_argument("--track")
     c.set_defaults(fn=cmd_check)
     h = sub.add_parser("hint")
     h.add_argument("drill")
+    h.add_argument("--track")
     h.set_defaults(fn=cmd_hint)
     args = p.parse_args()
     args.fn(args)
