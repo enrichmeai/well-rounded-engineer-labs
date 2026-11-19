@@ -74,10 +74,22 @@ The solutions are in their own folder so you are not tempted. Try first; take a 
 | | [05 · The parallel stream that lost items](functional/05-parallel-lost-items/) | Parallel `forEach` into a shared list: items lost, order random | 15 min |
 | | [06 · The report sorted the wrong way](functional/06-sorted-wrong-way/) | Filter, map, then two sorts where one two-key sort was needed | 10 min |
 
+| [Security](security/) | [01 · The file anyone could read](security/01-file-anyone-could-read/) | `../` in a file name, and the server hands over its secrets | 15 min |
+| | [02 · The order that was not yours](security/02-order-that-was-not-yours/) | Change the number in the URL, see a stranger's order | 10 min |
+| | [03 · The comment that ran code](security/03-comment-that-ran-code/) | A review comment that runs in every visitor's browser | 10 min |
+| | [04 · The password stored the fast way](security/04-password-stored-fast/) | SHA-256 with no salt: a leaked table, cracked in a day | 15 min |
+| | [05 · The reset link you could guess](security/05-reset-link-you-could-guess/) | A token seeded with the time, and it never expires | 15 min |
+| | [06 · The secret in the log](security/06-secret-in-the-log/) | Card numbers and tokens in a log forty people can read | 10 min |
+| | [07 · The field nobody meant to change](security/07-field-nobody-meant-to-change/) | A customer sends `is_admin: true`, and becomes one | 10 min |
+
 Drill numbers repeat across tracks, so name the track when you check or ask for a hint:
 `python3 practice.py check 03 --track data-structures`.
 
-More tracks will follow the guide: SQL, testing, security.
+The security track also has [one written standard](security/STANDARD.md) for people and coding agents alike, and an
+experiment: do a drill by hand, then [give it to an agent](security/README.md#try-it-with-an-agent) with and without
+that standard, and let the same tests judge both.
+
+More tracks will follow the guide: SQL and testing.
 
 ## Every drill is checked
 

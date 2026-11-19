@@ -34,3 +34,4 @@ jobs:
           python practice.py today
           python practice.py hint 01 --track concurrency
           python practice.py hint 01 --track data-structures
+          python practice.py hint 01 --track security
